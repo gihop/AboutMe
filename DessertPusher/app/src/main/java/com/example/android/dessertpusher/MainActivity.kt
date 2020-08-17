@@ -1,19 +1,3 @@
-/*
- * Copyright 2018, The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.example.android.dessertpusher
 
 import android.content.ActivityNotFoundException
@@ -29,21 +13,12 @@ import com.example.android.dessertpusher.databinding.ActivityMainBinding
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity(), LifecycleObserver {
-
     private var revenue = 0
     private var dessertsSold = 0
     private lateinit var dessertTimer: DessertTimer
 
-    // Contains all the views
     private lateinit var binding: ActivityMainBinding
 
-    /** Dessert Data **/
-
-    /**
-     * Simple data class that represents a dessert. Includes the resource id integer associated with
-     * the image, the price it's sold for, and the startProductionAmount, which determines when
-     * the dessert starts to be produced.
-     */
     data class Dessert(val imageId: Int, val price: Int, val startProductionAmount: Int)
 
     // Create a list of all desserts, in order of when they start being produced
@@ -74,7 +49,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
             onDessertClicked()
         }
 
-        dessertTimer = DessertTimer()
+        dessertTimer = DessertTimer(this.lifecycle)
 
         // Set the TextViews to the right values
         binding.revenue = revenue
@@ -85,9 +60,6 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         Timber.i("onCreate Called")
     }
 
-    /**
-     * Updates the score when the dessert is clicked. Possibly shows a new dessert.
-     */
     private fun onDessertClicked() {
 
         // Update the score
@@ -101,9 +73,6 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         showCurrentDessert()
     }
 
-    /**
-     * Determine which dessert to show.
-     */
     private fun showCurrentDessert() {
         var newDessert = allDesserts[0]
         for (dessert in allDesserts) {
@@ -124,9 +93,6 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         }
     }
 
-    /**
-     * Menu methods
-     */
     private fun onShare() {
         val shareIntent = ShareCompat.IntentBuilder.from(this)
                 .setText(getString(R.string.share_text, dessertsSold, revenue))
@@ -154,7 +120,6 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
     override fun onStart() {
         super.onStart()
-        dessertTimer.startTimer()
         Timber.i("onStart Called")
     }
 
@@ -170,7 +135,6 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
     override fun onStop() {
         super.onStop()
-        dessertTimer.stopTimer()
         Timber.i("onStop Called")
     }
 
