@@ -51,22 +51,18 @@ class GameFragment : Fragment() {
         Log.i("GameFragment", "Called ViewModelProvider")
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
-        binding.correctButton.setOnClickListener {
-            viewModel.onCorrect()
-            updateWordText()
-        }
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-            updateWordText()
-        }
+        binding.correctButton.setOnClickListener { viewModel.onCorrect() }
+        binding.skipButton.setOnClickListener { viewModel.onSkip() }
 
         viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
             binding.scoreText.text = newScore.toString()
         })
 
-        updateWordText()
-        return binding.root
+        viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->
+            binding.wordText.text = newWord
+        })
 
+        return binding.root
     }
 
     /**
@@ -75,11 +71,5 @@ class GameFragment : Fragment() {
     private fun gameFinished() {
         val action = GameFragmentDirections.actionGameToScore(viewModel.score.value ?: 0)
         findNavController(this).navigate(action)
-    }
-
-    /** Methods for updating the UI **/
-    private fun updateWordText() {
-        binding.wordText.text = viewModel.word
-
     }
 }
