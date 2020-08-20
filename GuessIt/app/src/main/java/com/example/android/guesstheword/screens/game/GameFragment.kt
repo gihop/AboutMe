@@ -62,10 +62,6 @@ class GameFragment : Fragment() {
         // the binding can observe LiveData updates
         binding.setLifecycleOwner(this)
 
-        viewModel.currentTime.observe(viewLifecycleOwner, Observer { newTime ->
-            binding.timerText.text = DateUtils.formatElapsedTime(newTime)
-        })
-
         viewModel.eventGameFinished.observe(viewLifecycleOwner, Observer { hasFinished ->
             if(hasFinished){
                 val action = GameFragmentDirections.actionGameToScore(viewModel.score.value ?: 0)
