@@ -27,10 +27,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class OverviewViewModel : ViewModel() {
-    private val _status = MutableLiveData<String>()
+enum class MarsApiStatus { LOADING, ERROR, DONE }
 
-    val response: LiveData<String>
+class OverviewViewModel : ViewModel() {
+    private val _status = MutableLiveData<MarsApiStatus>()
+
+    val status: LiveData<MarsApiStatus>
         get() = _status
 
     private var viewModelJob = Job()
@@ -48,13 +50,13 @@ class OverviewViewModel : ViewModel() {
         coroutineScope.launch {
             var getPropertiesDeferred = MarsApi.retrofitService.getProperties()
             try {
+                _status.value = MarsApiStatus.LOADING
                 var listResult = getPropertiesDeferred.await()
-                _status.value = "Success: ${listResult.size} Mars Properties retrieved."
-                if(listResult.size > 0){
-                    _properties.value = listResult
-                }
+                _status.value = MarsApiStatus.DONE
+                _properties.value = listResult
             } catch (t: Throwable){
-                _status.value = "Failure: " + t.message
+                _status.value = MarsApiStatus.ERROR
+                _properties.value = ArrayList()
             }
         }
     }
