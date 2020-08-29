@@ -43,3 +43,14 @@ fun NetworkVideoContainer.asDatabaseModel(): Array<DatabaseVideo> {
                 thumbnail = it.thumbnail)
     }.toTypedArray()
 }
+
+fun NetworkVideoContainer.asDomainModel(): List<Video> {
+    return videos.map {
+        Video(
+                title = it.title,
+                description = it.description,
+                url = it.url,
+                updated = it.updated,
+                thumbnail = it.thumbnail)
+    }
+}
