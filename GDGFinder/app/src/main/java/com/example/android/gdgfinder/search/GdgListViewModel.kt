@@ -22,7 +22,6 @@ class GdgListViewModel: ViewModel() {
     private val _regionList = MutableLiveData<List<String>>()
     private val _showNeedLocation = MutableLiveData<Boolean>()
 
-    // The external LiveData interface to the property is immutable, so only this class can modify
     val gdgList: LiveData< List<GdgChapter>>
         get() = _gdgList
 
@@ -33,7 +32,6 @@ class GdgListViewModel: ViewModel() {
         get() = _showNeedLocation
 
     init {
-        // process the initial filter
         onQueryChanged()
 
         viewModelScope.launch {
@@ -43,13 +41,11 @@ class GdgListViewModel: ViewModel() {
     }
 
     private fun onQueryChanged() {
-        currentJob?.cancel() // if a previous query is running cancel it before starting another
+        currentJob?.cancel()
         currentJob = viewModelScope.launch {
             try {
-                // this will run on a thread managed by Retrofit
                 _gdgList.value = repository.getChaptersForFilter(filter.currentValue)
                 repository.getFilters().let {
-                    // only update the filters list if it's changed since the last time
                     if (it != _regionList.value) {
                         _regionList.value = it
                     }

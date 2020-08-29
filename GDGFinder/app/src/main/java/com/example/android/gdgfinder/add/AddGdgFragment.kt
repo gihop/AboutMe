@@ -22,12 +22,11 @@ class AddGdgFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding = AddGdgFragmentBinding.inflate(inflater)
 
-        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.setLifecycleOwner(this)
 
         binding.viewModel = viewModel
 
-        viewModel.showSnackBarEvent.observe(this, Observer {
+        viewModel.showSnackBarEvent.observe(viewLifecycleOwner, Observer {
             if (it == true) { // Observed state is true.
                 Snackbar.make(
                     activity!!.findViewById(android.R.id.content),

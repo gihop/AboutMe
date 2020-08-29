@@ -22,28 +22,16 @@ class MainActivity : AppCompatActivity() {
         setupNavigation()
     }
 
-    /**
-     * Called when the hamburger menu or back button are pressed on the Toolbar
-     *
-     * Delegate this to Navigation.
-     */
     override fun onSupportNavigateUp()
             = navigateUp(findNavController(R.id.nav_host_fragment), binding.drawerLayout)
 
-    /**
-     * Setup Navigation for this Activity
-     */
     private fun setupNavigation() {
-        // first find the nav controller
         val navController = findNavController(R.id.nav_host_fragment)
 
         setSupportActionBar(binding.toolbar)
 
-        // then setup the action bar, tell it about the DrawerLayout
         setupActionBarWithNavController(navController, binding.drawerLayout)
 
-
-        // finally setup the left drawer (called a NavigationView)
         binding.navigationView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination: NavDestination, _ ->
