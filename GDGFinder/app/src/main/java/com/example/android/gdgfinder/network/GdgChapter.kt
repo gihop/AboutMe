@@ -14,7 +14,7 @@ data class GdgChapter(
     val region: String,
     val website: String,
     val geo: LatLong
- ): Parcelable
+): Parcelable
 
 @Parcelize
 data class LatLong(
@@ -25,11 +25,11 @@ data class LatLong(
 
 @Parcelize
 data class GdgResponse(
-        @Json(name = "filters_") val filters: Filter,
-        @Json(name = "data") val chapters: List<GdgChapter>
+    @Json(name = "filters_") val filters: Filter,
+    @Json(name = "data") val chapters: List<GdgChapter>
 ): Parcelable
 
 @Parcelize
 data class Filter(
-        @Json(name = "region") val regions: List<String>
+    @Json(name = "region") val regions: List<String>
 ): Parcelable

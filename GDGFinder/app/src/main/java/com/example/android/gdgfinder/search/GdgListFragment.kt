@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.android.gdgfinder.R
 import com.example.android.gdgfinder.databinding.FragmentGdgListBinding
 import com.google.android.gms.location.*
@@ -25,7 +26,7 @@ class GdgListFragment : Fragment() {
 
 
     private val viewModel: GdgListViewModel by lazy {
-        ViewModelProvider(this).get(GdgListViewModel::class.java)
+        ViewModelProviders.of(this).get(GdgListViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

@@ -16,14 +16,14 @@ interface GdgApiService {
             Deferred<GdgResponse>
 }
 private val moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
+    .add(KotlinJsonAdapterFactory())
+    .build()
 
 private val retrofit = Retrofit.Builder()
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .baseUrl(BASE_URL)
-        .build()
+    .addConverterFactory(MoshiConverterFactory.create(moshi))
+    .addCallAdapterFactory(CoroutineCallAdapterFactory())
+    .baseUrl(BASE_URL)
+    .build()
 
 object GdgApi {
     val retrofitService : GdgApiService by lazy { retrofit.create(GdgApiService::class.java) }
