@@ -16,7 +16,7 @@ GuessIt은 친구에게 단어에 대한 단서를 주면서 단어를 맞추는
 
 | language | skill                            |
 | -------- | -------------------------------- |
-| 'kotlin' | 'MVVM' 'LiveData' 'Data Binding' |
+| `kotlin` | `MVVM` `LiveData` `Data Binding` |
 
 ### 게임 시작
 
@@ -42,7 +42,7 @@ SleepTracker는 사용자의 수면 정보(시작 시간, 종료 시간, 수면 
 
 | language | skill                                                        |
 | -------- | ------------------------------------------------------------ |
-| 'kotlin' | 'MVVM' 'LiveData' 'Data Binding' 'Room' 'Coroutines' 'Recycler View' |
+| `kotlin` | `MVVM` `LiveData` `Data Binding` `Room` `Coroutines` `Recycler View` |
 
 ### 수면 기록
 
@@ -64,7 +64,7 @@ MarsRealEstate는 화성의 가상 부동산 애플리케이션이다.
 
 | language | skill                                                        |
 | -------- | ------------------------------------------------------------ |
-| 'kotlin' | 'MVVM' 'LiveData' 'Data Binding' 'Room' 'Coroutines' 'Recycler View' 'Retrofit' 'Moshi' 'Glide' |
+| `kotlin` | `MVVM` `LiveData` `Data Binding` `Room` `Coroutines` `Recycler View` `Retrofit` `Moshi` `Glide` |
 
 ### 이미지 로딩
 
